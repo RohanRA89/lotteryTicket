@@ -39,8 +39,13 @@ public randCalc() {
             return display;
         }
 
+    public ArrayList<Integer> getLotteryNumbers() {
+        return lotteryNumbers;
+    }
 
-
+    public void setLotteryNumbers(ArrayList<Integer> lotteryNumbers) {
+        this.lotteryNumbers = lotteryNumbers;
+    }
 }
 
 

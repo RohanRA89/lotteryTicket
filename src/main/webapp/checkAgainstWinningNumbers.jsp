@@ -27,7 +27,7 @@
 
 <h2>Here are your results:</h2>
     <ul>
-        <li><strong><%=request.getAttribute("ticketOutcome")%></strong></li>
+        <li><strong><%=request.getAttribute("winMessage")%></strong></li>
     </ul>
 
 </body>
