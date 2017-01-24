@@ -25,9 +25,9 @@
     </ul>
 </p>
 
-<h2>Here are your matching numbers:</h2>
+<h2>Here are your results:</h2>
     <ul>
-        <li><strong><%=request.getAttribute("matchNumb")%></strong></li>
+        <li><strong><%=request.getAttribute("ticketOutcome")%></strong></li>
     </ul>
 
 </body>

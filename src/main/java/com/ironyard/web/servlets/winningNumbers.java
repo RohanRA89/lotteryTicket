@@ -1,5 +1,6 @@
 package com.ironyard.web.servlets;
 
+import com.ironyard.web.data.randCalc;
 import org.apache.commons.collections.CollectionUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -20,8 +21,14 @@ import java.util.List;
 public class winningNumbers extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-         ArrayList<Integer>generatedPicks = (ArrayList<Integer>) request.getSession().getAttribute("lottList");
-         List<Integer>genPicks = new ArrayList<Integer>(generatedPicks);
+         ArrayList<randCalc>generatedPicks = (ArrayList<randCalc>) request.getSession().getAttribute("lottList");
+         String genNumbs = null;
+         for(randCalc genNumb : generatedPicks){
+             System.out.println(genNumb);
+              genNumbs = String.valueOf(genNumb);
+         }
+
+        // List<randCalc>genPicks = new ArrayList<randCalc>(generatedPicks);
 
         //int generatedPicks = (int) request.getSession().getAttribute("lottList");
         //ArrayList<Integer> yourGeneratedPicks = new ArrayList<Integer>(generatedPicks);
@@ -34,19 +41,26 @@ public class winningNumbers extends HttpServlet {
         System.out.println(generatedNumbers);
         request.setAttribute("listOfPicks" , pickList);*/
 
-        ArrayList<Integer> winningNumbers = new ArrayList<Integer>(Arrays.asList(new Integer[]{11, 48, 23, 43, 7, 52}));
+        ArrayList<Integer> winningNumbers  = new ArrayList<Integer>(Arrays.asList(new Integer[]{11, 48, 23, 43, 7, 52}));
+        String winNumbs = null;
+        for(Integer winNumb : winningNumbers){
+            System.out.println(winNumb);
+            winNumbs = String.valueOf(winNumb);
+        }
+        List winList = new ArrayList<Integer>(winningNumbers);
 
-        List<Integer> winList = new ArrayList<Integer>(winningNumbers);
-        //List<Integer> randomList = new ArrayList<randCal>(lotteryNumbers);
+        
         request.setAttribute("lotteryWin" , winList);
 
-        ArrayList<Integer> commonNumbers = (ArrayList) CollectionUtils.retainAll(winList , genPicks);
-        System.out.println(commonNumbers);
-        List<Integer> matching = commonNumbers;
-        request.setAttribute("matchNumb", matching);
 
-        //ArrayList<Integer> numbersThatMatch = CollectionsUtils.retainAll(winList , yourGeneratedPicks );
-        //String results = null;
+        String matchingNumbers = null;
+        if(winNumbs !=genNumbs){
+            matchingNumbers = "Sorry you did not match any numbers you do not win.";
+        }
+        else if(winNumbs == genNumbs){
+            matchingNumbers = "You've won a million dollars!";
+        }
+        request.setAttribute("ticketOutcome", matchingNumbers);
 
 
         String nextJSP = "/checkAgainstWinningNumbers.jsp";
