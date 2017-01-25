@@ -1,7 +1,6 @@
 package com.ironyard.web.servlets;
 
 import com.ironyard.web.data.randCalc;
-import org.apache.commons.collections.CollectionUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,28 +29,38 @@ public class winningNumbers extends HttpServlet {
 
               //genNumbs = String.valueOf(aTicket);
              // iteratting all numbers in a single user ticket
-              for(int aNumberInATicket: aTicket.getLotteryNumbers()) {
+             int matchingNumber = 0;
 
-                  String ticketMatch = null;
+
+             /*winningNumbers.set(0, generatedPicks.get(0).getLotteryNumbers().get(1));
+             winningNumbers.set(1, generatedPicks.get(0).getLotteryNumbers().get(3));
+             winningNumbers.set(2, generatedPicks.get(0).getLotteryNumbers().get(5));*/
+
+             for(int aNumberInATicket: aTicket.getLotteryNumbers()) {
+
+                 System.out.println("aNumberInATicket=" + aNumberInATicket + "#");
+                  //String ticketMatch = null;
                   // iterating all winning number
                   for (Integer aWinningNumber : winningNumbers) {
                       // compare this winning number vs the user number
 
+                      System.out.println("aWinningNumber=" + aWinningNumber + "#");
+
                       if(aWinningNumber == aNumberInATicket){
                           // we have a user gen ticket with a matched number
-                          aNumberInATicket++;
-                          System.out.println(aNumberInATicket);
 
+                          //System.out.println(aNumberInATicket);
+                          matchingNumber++;
 
                       }
 
-                      int match = Integer.parseInt(ticketMatch);//give me a null result. Number is not looping back around.
-                      //int match = aNumberInATicket gives me one value that cycles through and auto assigns a winner of one million.
+                      //int match = Integer.parseInt(ticketMatch);//give me a null result. Number is not looping back around.
+                      int match = matchingNumber; //gives me one value that cycles through and auto assigns a winner of one million.
                       String results = null;
                       if (match ==0){
                           results = "Sorry you did not win. T.T";
                       }
-                      else if(match <= 2 && match == 0){
+                      else if(match <= 2 && match >= 1){
                           results = "You've won a free ticket!";
                       }
                       else if(match == 3){
